@@ -46,6 +46,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		156C439B28922A74003E961F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		15E163A72890E69600347BD8 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +72,7 @@
 		15E163B22890E69600347BD8 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				156C439B28922A74003E961F /* Model */,
 				15E163C22890E6D000347BD8 /* ViewModel */,
 				15E163C12890E6CA00347BD8 /* View */,
 				15E163B32890E69600347BD8 /* PomodoroTimerApp.swift */,
@@ -88,9 +96,9 @@
 			children = (
 				15E163C52890E79700347BD8 /* Pomodoro.swift */,
 				15E163C728913E6000347BD8 /* Goals.swift */,
+				156C439728919A6B003E961F /* GoalsDetail.swift */,
 				15E163C928913E7200347BD8 /* Settings.swift */,
 				15E163CB28913E7F00347BD8 /* Summary.swift */,
-				156C439728919A6B003E961F /* GoalsDetail.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

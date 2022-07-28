@@ -18,18 +18,23 @@ class PomodoroModel: NSObject, ObservableObject {
   @Published var seconds: Int  = 0
   
   //MARK: Total Seconds
-  @Published var totalSeconds: Int = 0
-  @Published var statisticTotalSecond: Int = 0
+  @Published var totalSeconds: Int?
+  @Published var statisticTotalSecond: Int?
   
   
   //MARK: Starting Timer
   func startTimer(){
     withAnimation(.easeInOut(duration: 0.25)){isStarted = true}
-    timerStringValue = "\(hour == 0 ? "" : "\(hour):")\(minutes >= 10 ? "\(minutes)":"0\(minutes)"):\(seconds >= 10 ? "\(seconds)":"0\(seconds)")"
-  // MARK: Calculating Total Seconds for Timer Animation
-    totalSeconds = (hour * 3600) + (minutes * 60) + seconds
-    print("star timer\(totalSeconds)")
+    totalSeconds = 1500
     statisticTotalSecond = totalSeconds
+    hour = (totalSeconds ?? 0) / 3600
+    minutes = ((totalSeconds ?? 0) / 60) % 60
+    seconds = ((totalSeconds ?? 0) % 60)
+    timerStringValue = "\(hour == 0 ? "" : "\(hour):")\(minutes >= 10 ? "\(minutes)":"0\(minutes)"):\(seconds >= 10 ? "\(seconds)":"0\(seconds)")"
+    print(timerStringValue)
+  // MARK: Calculating Total Seconds for Timer Animation
+//    totalSeconds = (hour * 3600) + (minutes * 60) + seconds
+    print("star timer\(totalSeconds ?? 0)")
   }
   //MARK: Stopping timer
   func stopTimer(){
@@ -45,24 +50,19 @@ class PomodoroModel: NSObject, ObservableObject {
     timerStringValue = "00:00"
   }
   //MARK: Updating Time
-  func updateTimer(){
-    totalSeconds -= 1
-    print("updateTimer \(totalSeconds)")
-    progress = CGFloat(totalSeconds) / CGFloat(statisticTotalSecond)
+  func updateTimer(newSecond: Int){
+    totalSeconds = newSecond
+    print("updateTimer \(totalSeconds ?? 0)")
+    progress = CGFloat(totalSeconds ?? 0) / CGFloat(statisticTotalSecond ?? 0)
     progress = (progress < 0 ? 0 : progress)
     // 60 Minutes * 60 Seconds
-    hour = totalSeconds / 3600
-    minutes = (totalSeconds / 60) % 60
-    seconds = (totalSeconds % 60)
+    hour = (totalSeconds ?? 0) / 3600
+    minutes = ((totalSeconds ?? 0) / 60) % 60
+    seconds = ((totalSeconds ?? 0) % 60)
     timerStringValue = "\(hour == 0 ? "" : "\(hour):")\(minutes >= 10 ? "\(minutes)":"0\(minutes)"):\(seconds >= 10 ? "\(seconds)":"0\(seconds)")"
-    if totalSeconds <= 0{
+    if totalSeconds ?? 0 <= 0{
       isStarted = false
       print("Finished")
     }
   }
-  
-//  func secondsToHoursMinutesSeconds(_ seconds: Int) -> (Int, Int, Int) {
-//      return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-//  }
-  
 }

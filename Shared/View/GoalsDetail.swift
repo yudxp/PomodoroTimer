@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct GoalsDetail: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  
+  var task: [TaskData] = GoalList.goalsDetailArray
+  
+  var body: some View {
+      NavigationLink(destination: Pomodoro()){
+        List(task, id: \.id) { task in
+          Text(task.name)
+        }
+      }
     }
-}
+  }
 
 struct GoalsDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        GoalsDetail()
-    }
+  static var previews: some View {
+    GoalsDetail()
+  }
 }
