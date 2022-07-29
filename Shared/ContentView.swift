@@ -11,15 +11,15 @@ struct ContentView: View {
   @EnvironmentObject var pomodoroModel: PomodoroModel
   var body: some View {
     TabView{
-      Goals()
+      Goals().navigationViewStyle(StackNavigationViewStyle())
         .tabItem{
           Label("Goals", systemImage: "target")
         }
-      Summary()
+      Summary().navigationViewStyle(StackNavigationViewStyle())
         .tabItem{
           Label("Summary", systemImage: "chart.bar.xaxis")
         }
-      Settings()
+      Settings().navigationViewStyle(StackNavigationViewStyle())
         .tabItem{
           Label("Settings", systemImage: "gearshape.fill")
         }

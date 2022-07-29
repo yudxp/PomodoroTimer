@@ -9,32 +9,29 @@ import SwiftUI
 
 struct Settings: View {
   var body: some View {
-    VStack(alignment:.leading){
-      Text("Settings")
-        .font(.largeTitle)
-        .fontWeight(.bold)
-        .padding()
-      List{
-        Section(header: Text("Pomodoro")){
+    NavigationView {
+      VStack(alignment:.leading){
+        List{
+          Section(header: Text("Pomodoro")){
             Text("Pomodoro Length")
             Text("Short Break Length")
             Text("Long Break Length")
             Text("Long Break After")
           }
-        Section(header: Text("Alarm")){
-          Text("Work Alarm")
-          Text("Break Alarm")
-          Text("Vibrate")
-        }
-
-          
+          Section(header: Text("Alarm")){
+            Text("Work Alarm")
+            Text("Break Alarm")
+            Text("Vibrate")
+          }
         }
       }
+      .navigationTitle("Settings")
       .frame(maxWidth: .infinity)
       .edgesIgnoringSafeArea(.horizontal)
-      .listStyle(GroupedListStyle())
+    .listStyle(GroupedListStyle())
+    }
   }
-  }
+}
 
 
 struct Settings_Previews: PreviewProvider {

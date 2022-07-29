@@ -39,7 +39,6 @@ struct Pomodoro: View {
             //MARK: Knob
             GeometryReader{proxy in
               let size = proxy.size
-              
               Circle()
                 .fill(Color("Purple"))
                 .frame(width: 30, height: 30)
@@ -57,8 +56,10 @@ struct Pomodoro: View {
               .font(.system(size: 45, weight: .light))
               .rotationEffect(.init(degrees: 90))
               .animation(.none, value: pomodoroModel.progress)
+              .foregroundColor(.white)
+              .shadow(color: .black, radius: 1)
           }
-          .padding(60)
+          .padding(40)
           .frame(height: proxy.size.width)
           .rotationEffect(.init(degrees: -90))
           .animation(.easeInOut, value: pomodoroModel.progress)
@@ -94,9 +95,10 @@ struct Pomodoro: View {
     .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()){
       _ in
       if pomodoroModel.isStarted{
-//        pomodoroModel.st/artTimer()
         pomodoroModel.updateTimer(newSecond: pomodoroModel.totalSeconds! - 1)
       }
+    }
+    .alert("You did it 😭", isPresented: $pomodoroModel.isFinished){
     }
   }
 }

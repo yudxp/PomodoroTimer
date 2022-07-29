@@ -8,10 +8,11 @@
 import SwiftUI
 
 class PomodoroModel: NSObject, ObservableObject {
-    //MARK: Timer Properties}
+  //MARK: Timer Properties}
   @Published var progress: CGFloat = 1
   @Published var timerStringValue: String = "00:00"
   @Published var isStarted: Bool = false
+  @Published var isFinished: Bool = false
   
   @Published var hour: Int = 0
   @Published var minutes: Int = 0
@@ -25,16 +26,16 @@ class PomodoroModel: NSObject, ObservableObject {
   //MARK: Starting Timer
   func startTimer(){
     withAnimation(.easeInOut(duration: 0.25)){isStarted = true}
-    totalSeconds = 1500
+    totalSeconds = 15
     statisticTotalSecond = totalSeconds
     hour = (totalSeconds ?? 0) / 3600
     minutes = ((totalSeconds ?? 0) / 60) % 60
     seconds = ((totalSeconds ?? 0) % 60)
     timerStringValue = "\(hour == 0 ? "" : "\(hour):")\(minutes >= 10 ? "\(minutes)":"0\(minutes)"):\(seconds >= 10 ? "\(seconds)":"0\(seconds)")"
-    print(timerStringValue)
-  // MARK: Calculating Total Seconds for Timer Animation
-//    totalSeconds = (hour * 3600) + (minutes * 60) + seconds
-    print("star timer\(totalSeconds ?? 0)")
+//    print(timerStringValue)
+    // MARK: Calculating Total Seconds for Timer Animation
+    //    totalSeconds = (hour * 3600) + (minutes * 60) + seconds
+//    print("star timer\(totalSeconds ?? 0)")
   }
   //MARK: Stopping timer
   func stopTimer(){
@@ -55,7 +56,6 @@ class PomodoroModel: NSObject, ObservableObject {
     print("updateTimer \(totalSeconds ?? 0)")
     progress = CGFloat(totalSeconds ?? 0) / CGFloat(statisticTotalSecond ?? 0)
     progress = (progress < 0 ? 0 : progress)
-    // 60 Minutes * 60 Seconds
     hour = (totalSeconds ?? 0) / 3600
     minutes = ((totalSeconds ?? 0) / 60) % 60
     seconds = ((totalSeconds ?? 0) % 60)
@@ -63,6 +63,7 @@ class PomodoroModel: NSObject, ObservableObject {
     if totalSeconds ?? 0 <= 0{
       isStarted = false
       print("Finished")
+      isFinished = true
     }
   }
 }

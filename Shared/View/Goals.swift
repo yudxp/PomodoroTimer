@@ -11,17 +11,7 @@ struct Goals: View {
   
   var goals:[GoalsData] = GoalList.goalsArray
   var body: some View {
-    VStack(alignment: .leading) {
-//      HStack() {
-//        Text("Goals")
-//          .fontWeight(.bold)
-//          .font(.largeTitle)
-//          .padding()
-//        Image(systemName: "plus.circle")
-//          .frame(width: 44, height: 44)
-//          .foregroundColor(.blue)
-//          .padding()
-//      }
+    VStack{
       NavigationView {
         List(goals, id: \.id) { goals in
           NavigationLink(destination:GoalsDetail()) {
@@ -30,6 +20,7 @@ struct Goals: View {
                 .resizable()
                 .frame(width: 330, height: 160, alignment: .center)
                 .cornerRadius(15)
+                .scaledToFit()
               HStack{
                 VStack(alignment:.leading) {
                   Text(goals.name)
@@ -59,14 +50,17 @@ struct Goals: View {
               }
               .offset(y: 10)
             }
-          }
+          }.buttonStyle(PlainButtonStyle())
         }
+        .navigationTitle("Goals")
         .frame(maxWidth: .infinity)
         .edgesIgnoringSafeArea(.horizontal)
         .listStyle(GroupedListStyle())
-        .navigationTitle("Goals")
         .toolbar {
-          Image(systemName: "plus.circle")
+          NavigationLink(destination: GoalsNew()){
+            Image(systemName: "plus.circle")
+              .foregroundColor(Color.accentColor)
+          }.navigationTitle("New Goals")
         }
       }
     }
