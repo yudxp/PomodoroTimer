@@ -10,32 +10,39 @@ import SwiftUI
 struct TaskNew: View {
   @State private var timeEstimation: Int = 1
   @State private var taskName: String = ""
-    var body: some View {
-      VStack{
-        Form {
-            Section(header: Text("Pomodoro Cycle")){
-                Picker("Strength", selection: $timeEstimation) {
-                  ForEach(1...10, id: \.self) { number in
-                          Text("\(number)")
-                      }
-                }
-                .pickerStyle(.wheel)
-                .frame(height: 160)
+  @State private var isPressed: Bool = false
+  var body: some View {
+    VStack{
+      Form {
+        Section(header: Text("Pomodoro Cycle")){
+          Picker("Strength", selection: $timeEstimation) {
+            ForEach(1...10, id: \.self) { number in
+              Text("\(number)")
             }
-          Section{
-            TextField("Task Name", text: $taskName)
           }
+          .pickerStyle(.wheel)
+          .frame(height: 160)
         }
-      }.toolbar {
-          Button(<#T##title: StringProtocol##StringProtocol#>, action: <#T##() -> Void#>)
+        Section{
+          TextField("Task Name", text: $taskName)
+        }
       }
-    }
-}
+    }.toolbar {
+      Button("Save", action: {
+        isPressed = true
+      })
+    } .alert("Task Added 🥳", isPresented: $isPressed){
       
+    }
+    
+    
+  }
+}
+
 
 
 struct TaskNew_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskNew()
-    }
+  static var previews: some View {
+    TaskNew()
+  }
 }

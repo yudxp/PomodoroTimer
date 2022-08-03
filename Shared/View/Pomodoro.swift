@@ -69,7 +69,7 @@ struct Pomodoro: View {
             if pomodoroModel.isStarted{
               pomodoroModel.startTimer()
             } else{
-              pomodoroModel.stopTimer()
+              pomodoroModel.pauseTimer()
             }
           } label: {
             Image(systemName: !pomodoroModel.isStarted ? "timer" : "pause")

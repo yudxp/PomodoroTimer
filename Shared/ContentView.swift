@@ -23,6 +23,10 @@ struct ContentView: View {
         .tabItem{
           Label("Settings", systemImage: "gearshape.fill")
         }
+      BluetoothPeriph().navigationViewStyle(StackNavigationViewStyle())
+        .tabItem{
+          Label("Peripheral", systemImage: "wifi.circle")
+        }
     }
     
   }
